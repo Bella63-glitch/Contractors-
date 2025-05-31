@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Midland Contractors Company</title> 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #0056b3; /* Blue */
+      color: white;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; /* Needed for dropdown positioning */
+      z-index: 1000; /* Ensure header is above other content */
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    /* Dropdown menu styling */
+    .nav-toggle {
+      display: none; /* Hidden by default on larger screens */
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+      position: absolute; /* Position relative to header */
+      right: 1.5rem; /* Align to the right */
+      top: 50%; /* Center vertically */
+      transform: translateY(-50%);
+    }
+
+    .nav-toggle span {
+      background: white;
+      height: 3px;
+      width: 25px;
+      margin: 4px 0;
+      display: block;
+      transition: all 0.3s ease-in-out;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex; /* Default to row for larger screens */
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: text-decoration 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+      width: 100%;
+      height: 350px; /* Increased height for a more square-like appearance */
+      background: url('https://i.postimg.cc/JzXbpMtj/Tiling.png') center/cover no-repeat;
+      background-size: cover; /* Ensure image covers the area */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin: 1rem auto;
+      max-width: 1000px;
+      border-radius: 8px;
+      position: relative; /* Needed for overlay positioning */
+      overflow: hidden; /* Ensures overlay doesn't spill out */
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-text {
+      font-size: 2.5rem; /* Further increased font size for impact */
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+      animation: fadeInScale 1.5s ease-out forwards; /* Animation for the text */
+      opacity: 0; /* Start hidden for animation */
+    }
+
+    /* Hero Text Animation */
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .container {
+      padding: 1rem;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .search {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .search h2 {
+      color: #ff8c00; /* Orange */
+      margin-bottom: 0.5rem;
+    }
+    .search input {
+      padding: 0.7rem;
+      width: 250px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Larger cards */
+      gap: 1.5rem; /* Increased gap */
+      margin-top: 1rem;
+    }
+    .card {
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease; /* Added transition */
+    }
+    .card:hover {
+      transform: translateY(-5px); /* Slight lift on hover */
+    }
+    .card img {
+      width: 100%;
+      height: 150px; /* Increased image height */
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+    .card-content h3 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.1rem; /* Increased font size */
+      color: #0056b3; /* Blue */
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.6rem;
+    }
+    .price {
+      font-weight: bold;
+      color: #ff8c00; /* Orange */
+      font-size: 1rem; /* Increased font size */
+      margin-bottom: 0.5rem; /* Added margin */
+    }
+    .btn {
+      background: #0056b3; /* Blue */
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem; /* Adjusted padding */
+      margin-top: 0.6rem;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 0.9rem; /* Increased font size */
+      align-self: flex-start;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0077cc;
+    }
+
+    /* General Section Styling */
+    .section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .section h2 {
+        color: #ff8c00;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1.8rem; /* Larger section titles */
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #003366; /* Darker blue for footer */
+      color: white;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin-top: 3rem; /* Space above footer */
+    }
+    footer p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #ff8c00; /* Orange link in footer */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Responsive Design for Dropdown */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row; /* Keep logo and toggle on one row */
+        justify-content: space-between;
+        padding-right: 1rem; /* Adjust padding for toggle */
+      }
+
+      .nav-toggle {
+        display: flex; /* Show hamburger icon */
+      }
+
+      nav ul {
+        display: none; /* Hide navigation links by default */
+        flex-direction: column;
+        width: 100%;
+        background-color: #004080; /* Slightly lighter blue for dropdown background */
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        padding: 1rem 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      nav ul.active {
+        display: flex; /* Show navigation links when active */
+      }
+
+      nav ul li {
+        margin: 0.5rem 1.5rem; /* Adjust margins for vertical list */
+        text-align: left;
+      }
+
+      /* Hero Section adjustments */
+      .hero {
+        height: 250px; /* Adjust hero height for smaller screens */
+      }
+      .hero-text {
+        font-size: 1.8rem; /* Adjust font size for smaller screens */
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller cards on mobile */
+        gap: 1rem;
+      }
+      .card img {
+        height: 120px; /* Adjust card image height */
+      }
+      .card-content h3 {
+        font-size: 1rem;
+      }
+      .card-content p, .price {
+        font-size: 0.85rem;
+      }
+      .btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style> 
+ </head> 
+ <body> 
+  <header> 
+   <h1>Midland Contractors</h1> 
+   <div class="nav-toggle" id="navToggle"> <span></span> <span></span> <span></span> 
+   </div> 
+   <nav> 
+    <ul id="navbarNav"> 
+     <li><a href="#about">About Us</a></li> 
+     <li><a href="#services">Services</a></li> 
+     <li><a href="#products">Products</a></li> 
+     <li><a href="#footer">Contact Us</a></li> 
+    </ul> 
+   </nav> 
+  </header> 
+  <div class="hero"> 
+   <div class="hero-overlay"> <span class="hero-text">Transforming Spaces with Expertise</span> 
+   </div> 
+  </div> 
+  <div class="container"> 
+   <div class="search"> 
+    <h2>How can we help you? <span style="color: #ff8c00;">🥰</span></h2> 
+    <input type="text" id="searchBox" placeholder="Search our services or products..." onkeyup="filterItems()"> 
+   </div> 
+   <section class="section" id="services"> 
+    <h2>Our Services</h2> 
+    <div class="grid" id="servicesGrid"> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=New+Home+Tiling" alt="New Home Tiling"> 
+      <div class="card-content"> 
+       <h3>New Home Tiling</h3> 
+       <p>Professional floor and wall tiling for new constructions.</p> 
+       <p class="price">From KES 1,000/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=Gypsum+Ceiling" alt="Gypsum Ceiling"> 
+      <div class="card-content"> 
+       <h3>Gypsum Ceiling</h3> 
+       <p>Modern and elegant gypsum ceiling installations.</p> 
+       <p class="price">From KES 1,500/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=Waterproofing" alt="Waterproofing"> 
+      <div class="card-content"> 
+       <h3>Waterproofing</h3> 
+       <p>Keep your home protected from water damage.</p> 
+       <p class="price">From KES 800/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=Painting" alt="Painting"> 
+      <div class="card-content"> 
+       <h3>Painting</h3> 
+       <p>Interior and exterior painting services.</p> 
+       <p class="price">From KES 500/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=Skimming" alt="Skimming"> 
+      <div class="card-content"> 
+       <h3>Skimming</h3> 
+       <p>Smooth finishing for walls and ceilings.</p> 
+       <p class="price">From KES 700/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/0056b3/FFFFFF?Text=Stone+Building" alt="Stone Building"> 
+      <div class="card-content"> 
+       <h3>Stone Building</h3> 
+       <p>Construction of durable and aesthetic stone structures.</p> 
+       <p class="price">From KES 4,000/sq.m</p> <button class="btn">Learn More</button> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="section" id="products"> 
+    <h2>Our Products</h2> 
+    <div class="grid" id="productsGrid"> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/ff8c00/FFFFFF?Text=Cladding+Stones" alt="Cladding Stones"> 
+      <div class="card-content"> 
+       <h3>Cladding Stones</h3> 
+       <p>Decorative stone finishes for any surface, enhancing curb appeal.</p> 
+       <p class="price">From KES 2,000/sq.m</p> <button class="btn">View Product</button> 
+      </div> 
+     </div> 
+     <div class="card"> 
+      <img src="https://via.placeholder.com/300x180/ff8c00/FFFFFF?Text=Cabros+Paving" alt="Cabros"> 
+      <div class="card-content"> 
+       <h3>Cabros Paving Blocks</h3> 
+       <p>Durable paving blocks for driveways, walkways, and landscaping.</p> 
+       <p class="price">From KES 1,200/sq.m</p> <button class="btn">View Product</button> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="section" id="about"> 
+    <h2>About Us</h2> 
+    <p> **Midland Contractors** is a professional company committed to providing high-quality construction and home finishing solutions across Kenya. With years of experience and a passion for excellence, we help homeowners and businesses transform their spaces with precision and care. Our team of skilled professionals is dedicated to delivering superior craftsmanship in every project we undertake. We pride ourselves on our attention to detail, reliability, and commitment to customer satisfaction, ensuring your vision becomes a reality. </p> 
+   </section> 
+  </div> 
+  <footer id="footer"> 
+   <h2>Contact Us</h2> 
+   <p> Get in touch with us today for a consultation or to learn more about our services and products. </p> 
+   <p> <a href="tel:+254712345678">Call Us: +254 712 345 678</a> (Kenya) </p> 
+   <p> Email Us: <a href="mailto:info@midlandcontractors.co.ke">info@midlandcontractors.co.ke</a> </p> 
+   <p>© 2025 Midland Contractors. All rights reserved.</p> 
+  </footer> 
+  <script>
+    function filterItems() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const servicesCards = document.querySelectorAll("#servicesGrid .card");
+      const productsCards = document.querySelectorAll("#productsGrid .card");
+
+      servicesCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(input) ? "flex" : "none";
+      });
+
+      productsCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(input) ? "flex" : "none";
+      });
+    }
+
+    // JavaScript for the dropdown menu
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('navToggle');
+      const navbarNav = document.getElementById('navbarNav');
+
+      if (navToggle && navbarNav) {
+        navToggle.addEventListener('click', function() {
+          navbarNav.classList.toggle('active');
+        });
+
+        // Close dropdown when a link is clicked (for smoother navigation on mobile)
+        navbarNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', function() {
+            if (navbarNav.classList.contains('active')) {
+              navbarNav.classList.remove('active');
+            }
+          });
+        });
+      }
+    });
+  </script> 
+ 
+</body></html>
